@@ -71,7 +71,7 @@ type Args struct {
 
 	// 处理没有拼音的字符（默认忽略没有拼音的字符）
 	// 函数返回的 slice 的长度为0 则表示忽略这个字符
-	Fallback func(r rune, a Args) []string
+	Fallback func(r rune, a Args) string
 }
 
 // Style 默认配置：风格
@@ -84,8 +84,8 @@ var Heteronym = false
 var Separator = "-"
 
 // Fallback 默认配置: 如何处理没有拼音的字符(忽略这个字符)
-var Fallback = func(r rune, a Args) []string {
-	return []string{}
+var Fallback = func(r rune, a Args) string {
+	return string(r)
 }
 
 var finalExceptionsMap = map[string]string{
@@ -215,7 +215,7 @@ func SinglePinyin(r rune, a Args) []string {
 	if ok {
 		pys = strings.Split(value, ",")
 	} else {
-		pys = a.Fallback(r, a)
+		pys = append(pys, a.Fallback(r, a))
 	}
 	if len(pys) > 0 {
 		if !a.Heteronym {
