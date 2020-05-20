@@ -59,14 +59,14 @@ func parseCmdArgs() cmdArgs {
 }
 
 func main() {
-	args := parseCmdArgs()
-	usage := "gen_pinyin_dict INPUT OUTPUT"
-	inputFile := args.inputFile
-	outputFile := args.outputFile
-	if inputFile == "" || outputFile == "" {
-		fmt.Println(usage)
-		os.Exit(1)
-	}
+	//args := parseCmdArgs()
+	//usage := "gen_pinyin_dict INPUT OUTPUT"
+	inputFile := "./pinyin.txt"
+	outputFile := "./pinyin_dict.go"
+	//if inputFile == "" || outputFile == "" {
+	//	fmt.Println(usage)
+	//	os.Exit(1)
+	//}
 
 	inFp, err := os.Open(inputFile)
 	if err != nil {
